@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Upload Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Data</h1>
+        
+        <div id="message" class="message"></div>
+        <div id="loading" class="loading">Uploading... Please wait.</div>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="chittagong">Chittagong</option>
+                    <option value="sylhet">Sylhet</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="paragraph">Generated Paragraph:</label>
+                <textarea id="paragraph" name="paragraph" readonly 
+                         placeholder="A paragraph will be automatically generated..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="audioFile">Audio File:</label>
+                <input type="file" id="audioFile" name="audioFile" accept="audio/*" required>
+                <small class="file-info">
+                    Supported formats: MP3, WAV, OGG, M4A, etc.
+                </small>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Upload Data
+            </button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
