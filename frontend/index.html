@@ -3,124 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Data Platform | Upload & Process</title>
+    <title>Data Upload Form</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="background-animation">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <header class="header">
-            <div class="header-content">
-                <i class="fas fa-waveform-lines header-icon"></i>
-                <h1>Audio Data Platform</h1>
-                <p class="subtitle">Upload and process your audio files with advanced AI technology</p>
-            </div>
-        </header>
-
-        <div class="container">
-            <div class="form-header">
-                <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                <h2>Upload Your Audio Data</h2>
-                <p>Select a category and upload your audio file to get started</p>
+    <div class="container">
+        <h1>Upload Data</h1>
+        
+        <div id="message" class="message"></div>
+        <div id="loading" class="loading">Uploading... Please wait.</div>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="chittagong">Chittagong</option>
+                    <option value="sylhet">Sylhet</option>
+                </select>
             </div>
             
-            <div id="message" class="message"></div>
-            <div id="loading" class="loading">
-                <div class="loading-spinner"></div>
-                <span>Processing your audio file... Please wait</span>
+            <div class="form-group">
+                <label for="paragraph">Generated Paragraph:</label>
+                <textarea id="paragraph" name="paragraph" readonly 
+                         placeholder="A paragraph will be automatically generated..."></textarea>
             </div>
             
-            <form id="uploadForm" enctype="multipart/form-data" class="upload-form">
-                <div class="form-group">
-                    <label for="category">
-                        <i class="fas fa-tags"></i>
-                        Select Category
-                    </label>
-                    <div class="select-wrapper">
-                        <select id="category" name="category" required>
-                            <option value="">Choose a category...</option>
-                            <option value="chittagong">🏙️ Chittagong</option>
-                            <option value="sylhet">🌿 Sylhet</option>
-                        </select>
-                        <i class="fas fa-chevron-down select-arrow"></i>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="paragraph">
-                        <i class="fas fa-paragraph"></i>
-                        Generated Content
-                    </label>
-                    <div class="textarea-wrapper">
-                        <textarea id="paragraph" name="paragraph" readonly 
-                                 placeholder="AI-generated content will appear here automatically..."></textarea>
-                        <div class="textarea-overlay">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="audioFile">
-                        <i class="fas fa-microphone"></i>
-                        Audio File Upload
-                    </label>
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="audioFile" name="audioFile" accept="audio/*" required>
-                        <div class="file-upload-area">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Drop your audio file here or <span>browse</span></p>
-                            <small class="file-info">
-                                <i class="fas fa-info-circle"></i>
-                                Supported: MP3, WAV, OGG, M4A, FLAC (Max 50MB)
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-upload"></i>
-                    <span>Upload & Process Audio</span>
-                    <div class="btn-ripple"></div>
-                </button>
-            </form>
-
-            <div class="features-section">
-                <h3>Why Choose Our Platform?</h3>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-bolt"></i>
-                        <h4>Fast Processing</h4>
-                        <p>Lightning-fast audio processing with AI</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-shield-alt"></i>
-                        <h4>Secure Upload</h4>
-                        <p>Your files are encrypted and secure</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Advanced Analytics</h4>
-                        <p>Detailed insights from your audio data</p>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="audioFile">Audio File:</label>
+                <input type="file" id="audioFile" name="audioFile" accept="audio/*" required>
+                <small class="file-info">
+                    Supported formats: MP3, WAV, OGG, M4A, etc.
+                </small>
             </div>
-        </div>
-
-        <footer class="footer">
-            <p>&copy; 2025 Audio Data Platform. Powered by AI Technology.</p>
-        </footer>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Upload Data
+            </button>
+        </form>
     </div>
 
     <script src="script.js"></script>

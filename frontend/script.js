@@ -32,17 +32,7 @@ function showMessage(text, type) {
 function showLoading(show) {
     loadingDiv.style.display = show ? 'block' : 'none';
     submitBtn.disabled = show;
-    
-    const btnText = submitBtn.querySelector('span');
-    const btnIcon = submitBtn.querySelector('i');
-    
-    if (show) {
-        btnText.textContent = 'Processing...';
-        btnIcon.className = 'fas fa-spinner fa-spin';
-    } else {
-        btnText.textContent = 'Upload & Process Audio';
-        btnIcon.className = 'fas fa-upload';
-    }
+    submitBtn.textContent = show ? 'Uploading...' : 'Upload Data';
 }
 
 
@@ -193,89 +183,4 @@ audioFileInput.addEventListener('change', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     // Auto-load a random paragraph when the page loads
     loadRandomParagraph();
-    
-    // Add smooth animations
-    const container = document.querySelector('.container');
-    const header = document.querySelector('.header');
-    
-    // Animate elements on load
-    setTimeout(() => {
-        header.classList.add('fade-in');
-    }, 200);
-    
-    setTimeout(() => {
-        container.classList.add('slide-up');
-    }, 400);
-    
-    // Add ripple effect to submit button
-    submitBtn.addEventListener('click', function(e) {
-        const rect = this.getBoundingClientRect();
-        const ripple = this.querySelector('.btn-ripple');
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.style.transform = 'scale(0)';
-        ripple.style.animation = 'ripple 0.6s linear';
-    });
-    
-    // Enhanced file upload area
-    const fileUploadArea = document.querySelector('.file-upload-area');
-    const fileInput = document.getElementById('audioFile');
-    
-    fileUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = 'var(--primary-color)';
-        fileUploadArea.style.background = 'rgba(102, 126, 234, 0.1)';
-    });
-    
-    fileUploadArea.addEventListener('dragleave', () => {
-        fileUploadArea.style.borderColor = 'var(--border-color)';
-        fileUploadArea.style.background = 'var(--bg-secondary)';
-    });
-    
-    fileUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = 'var(--border-color)';
-        fileUploadArea.style.background = 'var(--bg-secondary)';
-        
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            fileInput.files = files;
-            updateFileDisplay(files[0]);
-        }
-    });
-    
-    // Update file display when file is selected
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            updateFileDisplay(file);
-        }
-    });
 });
-
-// Function to update file display
-function updateFileDisplay(file) {
-    const fileUploadArea = document.querySelector('.file-upload-area');
-    const existingDisplay = fileUploadArea.querySelector('.file-selected');
-    
-    if (existingDisplay) {
-        existingDisplay.remove();
-    }
-    
-    const fileDisplay = document.createElement('div');
-    fileDisplay.className = 'file-selected';
-    fileDisplay.innerHTML = `
-        <i class="fas fa-file-audio" style="color: var(--success-color); font-size: 2rem; margin-bottom: 0.5rem;"></i>
-        <p style="color: var(--success-color); font-weight: 600;">${file.name}</p>
-        <small style="color: var(--text-secondary);">${(file.size / (1024 * 1024)).toFixed(2)} MB</small>
-    `;
-    
-    fileUploadArea.appendChild(fileDisplay);
-    fileUploadArea.style.borderColor = 'var(--success-color)';
-    fileUploadArea.style.background = 'rgba(16, 185, 129, 0.05)';
-}
