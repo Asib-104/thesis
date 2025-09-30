@@ -42,12 +42,20 @@ app.use(bodyParser.json());
 // Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// API routes
 app.use('/data', dataRoutes);
+
+// Health check route
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK', message: 'Server is running' });
+});
 
 // Serve frontend for all non-API routes
 app.get('*', (req, res) => {
-    if (!req.path.startsWith('/data')) {
+    if (!req.path.startsWith('/data') && !req.path.startsWith('/api')) {
         res.sendFile(path.join(__dirname, '../frontend/index.html'));
+    } else {
+        res.status(404).json({ error: 'API endpoint not found' });
     }
 });
 
@@ -56,3 +64,6 @@ app.listen(PORT, () => {
     connectDB();
     console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
+// Export for Vercel
+export default app;
