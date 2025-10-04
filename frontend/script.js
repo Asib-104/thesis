@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    SERVER_URL: 'http://localhost:5000',
+    SERVER_URL: window.location.hostname === 'localhost' ? 'http://localhost:5000' : window.location.origin,
     PARAGRAPH_API: 'https://api.myjson.online/v1/records/5ee18fa0-1358-4b62-8434-349637cfbd39',
     MAX_FILE_SIZE: 50 * 1024 * 1024 // 50MB
 };
